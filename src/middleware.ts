@@ -1,13 +1,9 @@
+import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
 
-const PROTECTED_ROUTES = ["/dashboard", "/api/admin"];
+const isProtectedRoute = createRouteMatcher(["/dashboard(.*)", "/api/admin(.*)"]);
 
-function isProtectedRoute(pathname: string) {
-  return PROTECTED_ROUTES.some((route) => pathname.startsWith(route));
-}
-
-export async function middleware(request: NextRequest) {
+export default clerkMiddleware(async (auth, request) => {
   const response = NextResponse.next();
 
   // Security headers
@@ -15,24 +11,18 @@ export async function middleware(request: NextRequest) {
   response.headers.set("X-Frame-Options", "DENY");
   response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
 
-  // If Clerk is configured, use it for route protection
-  if (
-    process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY &&
-    isProtectedRoute(request.nextUrl.pathname)
-  ) {
-    const { clerkMiddleware, createRouteMatcher } = await import(
-      "@clerk/nextjs/server"
-    );
-    const matcher = createRouteMatcher(["/dashboard(.*)", "/api/admin(.*)"]);
-    return clerkMiddleware(async (auth) => {
-      if (matcher(request)) await auth.protect();
-      return response;
-    })(request, {} as never);
+  if (isProtectedRoute(request)) {
+    await auth.protect();
   }
 
   return response;
-}
+});
 
 export const config = {
-  matcher: ["/((?!_next|.*\\..*).*)", "/api/(.*)"]
+  matcher: [
+    "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
+    "/(api|trpc)(.*)",
+    "/__clerk/:path*",
+  ],
 };
+

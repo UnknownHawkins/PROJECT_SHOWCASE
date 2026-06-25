@@ -2,6 +2,7 @@ import Link from "next/link";
 import { publicNav } from "@/constants/navigation";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
+import { SignInButton, SignUpButton, Show, UserButton } from "@clerk/nextjs";
 
 export function SiteHeader() {
   return (
@@ -23,9 +24,27 @@ export function SiteHeader() {
         </nav>
         <div className="flex items-center gap-3">
           <ThemeToggle />
-          <Button asChild size="sm" variant="secondary">
-            <Link href="/dashboard">Dashboard</Link>
-          </Button>
+          <Show when="signed-out">
+            <SignInButton mode="modal">
+              <Button size="sm" variant="ghost" className="text-xs font-bold uppercase tracking-[0.16em]">
+                Sign In
+              </Button>
+            </SignInButton>
+            <SignUpButton mode="modal">
+              <Button size="sm" variant="secondary" className="text-xs font-bold uppercase tracking-[0.16em]">
+                Sign Up
+              </Button>
+            </SignUpButton>
+            <Button asChild size="sm" variant="ghost">
+              <Link href="/dashboard">Dashboard</Link>
+            </Button>
+          </Show>
+          <Show when="signed-in">
+            <UserButton />
+            <Button asChild size="sm" variant="secondary">
+              <Link href="/dashboard">Dashboard</Link>
+            </Button>
+          </Show>
         </div>
       </div>
     </header>
