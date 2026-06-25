@@ -1,0 +1,86 @@
+== PROJECTS PORTFOLIO ==
+
+1. Projects Showcase (This Portfolio Platform)
+   Description: A production-grade full-stack developer portfolio platform featuring real-time GitHub integration, an admin dashboard, analytics, and an AI chat assistant.
+   Status: Live
+   Features:
+   - GitHub intelligence with GraphQL API integration
+   - Real-time contribution heatmap and language stats
+   - Secure admin dashboard with Clerk auth + RBAC
+   - AI chatbot powered by Google Gemini with document fallback
+   - Blog system with MDX support
+   - Contact form with Discord webhook notifications
+   - 3D animations with Three.js & React Three Fiber
+   - PWA support, CI/CD with GitHub Actions
+   Stack: Next.js 15, TypeScript, Tailwind CSS, Prisma, Clerk, PostgreSQL, Redis, Gemini API
+   GitHub: https://github.com/UnknownHawkins/Projects-Showcase
+
+2. BookHub (BOOK_REVIEW_APP)
+   Description: A modern, feature-rich Digital Library & Social Reading Platform built with React, designed for smooth book discovery, personal tracking, reviews, and an interactive reading community.
+   Status: Completed
+   Features:
+   - Search and discover books via Google Books API / Open Library API
+   - Personal reading lists, shelves, and progress tracking
+   - User authentication and profiles
+   Stack: React, Node.js, Express, MongoDB, Google Books API, JWT, Docker, Jest
+   GitHub: https://github.com/UnknownHawkins/BOOK_REVIEW_APP
+
+3. CareerPath AI (CAREERPATH-AI)
+   Description: An intelligent career guidance platform that uses Google's Gemini AI to provide personalized career recommendations based on your skills, interests, and goals.
+   Status: Completed (Private Repo)
+   Features:
+   - Career assessment flow
+   - Gemini AI recommendation layer
+   - Visual result breakdown and guidance
+   Stack: JavaScript, Next.js, Node.js, Gemini API, CSS3
+   GitHub: https://github.com/UnknownHawkins/CAREERPATH-AI
+
+4. Medi-AI (MEDI-AI-GFG-HACKATHON-)
+   Description: An AI-powered medicine reminder and verification system for patients (especially elderly) who forget medicines, take wrong doses, or can't read prescriptions.
+   Status: Completed
+   Features:
+   - AI-powered medicine verification
+   - Speech-activated dosage reminders
+   - Accessible interface designed for elderly users
+   Stack: JavaScript, HTML5/CSS3, Web Speech API, Node.js
+   GitHub: https://github.com/UnknownHawkins/MEDI-AI-GFG-HACKATHON-
+
+5. Samvidhan AI (Samvidhan-AI)
+   Description: India's first bilingual (Hindi/English) sovereign LegalTech AI. Uses BharatGen LegalParam + RAG on authentic judicial data for free guidance & premium citation-backed insights with Supreme Court references.
+   Status: Completed
+   Features:
+   - RAG on authentic judicial data
+   - Bilingual voice and text query support
+   - Supreme Court references and citations
+   Stack: React, Node.js, MongoDB, Express, RAG, Gemini API
+   GitHub: https://github.com/thevibingteen/Samvidhan-AI
+
+6. CodeBuddy (CODEBUDDY)
+   Description: Developer and student collaboration platform for finding coding partners, forming teams, and coordinating projects.
+   Status: Completed
+   Features:
+   - Paste code and get instant AI feedback
+   - Team discovery and matching workflow
+   - Real-time communication primitives
+   Stack: HTML5, CSS3, JavaScript, Node.js, WebSockets, Firebase
+   GitHub: https://github.com/UnknownHawkins/CODEBUDDY
+
+7. Hostel Management System (HOSTEL-MANAGEMENT-SYSTEM)
+   Description: Operations dashboard for room allocation, student records, hostel administration, and payment tracking.
+   Status: Completed
+   Features:
+   - Dedicated dashboards for wardens and students
+   - Room allocation and student record management
+   - Leave requests and mess payments tracking
+   Stack: HTML5, CSS3, JavaScript, Bootstrap, MySQL, PHP
+   GitHub: https://github.com/UnknownHawkins/HOSTEL-MANAGEMENT-SYSTEM
+
+8. Life Ruination Protocol (LIFE_RUINATION_PROTOCOL)
+   Description: A satirical web application that humorously guides users through a "systematic approach to dismantling their existence" over 56 carefully awkward days.
+   Status: Completed
+   Features:
+   - Canvas-based interaction
+   - Custom visual language
+   - Performance-focused animations
+   Stack: JavaScript, Canvas API, CSS3, SVG, Creative Coding
+   GitHub: https://github.com/UnknownHawkins/LIFE_RUINATION_PROTOCOL

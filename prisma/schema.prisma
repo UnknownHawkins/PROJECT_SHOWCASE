@@ -1,0 +1,309 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  VISITOR
+}
+
+enum ProjectStatus {
+  PLANNING
+  ACTIVE
+  SHIPPED
+  ARCHIVED
+}
+
+enum ProjectCategory {
+  FRONTEND
+  BACKEND
+  AI
+  FULLSTACK
+  MOBILE
+}
+
+enum MessageStatus {
+  NEW
+  READ
+  ARCHIVED
+}
+
+enum NotificationType {
+  INFO
+  SUCCESS
+  WARNING
+  ERROR
+}
+
+model User {
+  id             String        @id @default(cuid())
+  clerkId        String?       @unique
+  email          String        @unique
+  name           String?
+  avatarUrl      String?
+  passwordHash   String?
+  role           Role          @default(VISITOR)
+  lastIp         String?
+  lastDevice     String?
+  lastLoginAt    DateTime?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  sessions       Session[]
+  messages       Message[]
+  testimonials   Testimonial[]
+  activityLogs   ActivityLog[]
+  notifications  Notification[]
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  userId       String
+  refreshHash  String
+  ipAddress    String?
+  userAgent    String?
+  deviceId     String?
+  expiresAt    DateTime
+  revokedAt    DateTime?
+  createdAt    DateTime @default(now())
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+model Project {
+  id            String           @id @default(cuid())
+  slug          String           @unique
+  title         String
+  description   String
+  summary       String?
+  demoUrl       String?
+  githubUrl     String?
+  coverImage    String?
+  status        ProjectStatus    @default(ACTIVE)
+  category      ProjectCategory  @default(FULLSTACK)
+  featured      Boolean          @default(false)
+  features      String[]
+  challenges    String[]
+  architecture  String?
+  screenshots   String[]
+  metrics       Json?
+  timeline      Json?
+  tags          String[]
+  startedAt     DateTime?
+  shippedAt     DateTime?
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+  technologies  ProjectTechnology[]
+  categories    Category[]       @relation("ProjectCategories")
+
+  @@index([category, status])
+}
+
+model Technology {
+  id        String              @id @default(cuid())
+  name      String              @unique
+  icon      String?
+  color     String?
+  createdAt DateTime            @default(now())
+  projects  ProjectTechnology[]
+  skills    Skill[]
+}
+
+model ProjectTechnology {
+  projectId    String
+  technologyId String
+  project      Project    @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  technology   Technology @relation(fields: [technologyId], references: [id], onDelete: Cascade)
+
+  @@id([projectId, technologyId])
+}
+
+model Skill {
+  id           String      @id @default(cuid())
+  name         String
+  level        Int         @default(70)
+  category     String
+  years        Float?
+  technologyId String?
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  technology   Technology? @relation(fields: [technologyId], references: [id])
+}
+
+model Experience {
+  id          String    @id @default(cuid())
+  company     String
+  role        String
+  location    String?
+  description String
+  startDate   DateTime
+  endDate     DateTime?
+  current     Boolean   @default(false)
+  highlights  String[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Education {
+  id          String   @id @default(cuid())
+  institution String
+  degree      String
+  field       String?
+  startYear   Int
+  endYear     Int?
+  grade       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Certificate {
+  id          String   @id @default(cuid())
+  title       String
+  issuer      String
+  credential  String?
+  url         String?
+  issuedAt    DateTime
+  expiresAt   DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Achievement {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  date        DateTime?
+  url         String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model BlogPost {
+  id          String     @id @default(cuid())
+  slug        String     @unique
+  title       String
+  excerpt     String
+  content     String
+  coverImage  String?
+  published   Boolean    @default(false)
+  publishedAt DateTime?
+  readingTime Int        @default(1)
+  likes       Int        @default(0)
+  tags        String[]
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  categoryId  String?
+  category    Category?  @relation(fields: [categoryId], references: [id])
+  comments    Comment[]
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  postId    String
+  name      String
+  email     String
+  body      String
+  approved  Boolean  @default(false)
+  createdAt DateTime @default(now())
+  post      BlogPost @relation(fields: [postId], references: [id], onDelete: Cascade)
+}
+
+model Category {
+  id        String     @id @default(cuid())
+  name      String     @unique
+  slug      String     @unique
+  posts     BlogPost[]
+  projects  Project[]  @relation("ProjectCategories")
+}
+
+model GitHubStatsCache {
+  id        String   @id @default(cuid())
+  username  String   @unique
+  payload   Json
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  expiresAt DateTime
+}
+
+model VisitorAnalytics {
+  id          String   @id @default(cuid())
+  path        String
+  referrer    String?
+  country     String?
+  city        String?
+  browser     String?
+  os          String?
+  device      String?
+  ipHash      String?
+  userAgent   String?
+  createdAt   DateTime @default(now())
+
+  @@index([path, createdAt])
+}
+
+model Message {
+  id        String        @id @default(cuid())
+  userId    String?
+  name      String
+  email     String
+  subject   String?
+  body      String
+  status    MessageStatus @default(NEW)
+  ipHash    String?
+  createdAt DateTime      @default(now())
+  user      User?         @relation(fields: [userId], references: [id])
+}
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  userId    String?
+  name      String
+  role      String?
+  company   String?
+  avatarUrl String?
+  quote     String
+  rating    Int      @default(5)
+  approved  Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User?    @relation(fields: [userId], references: [id])
+}
+
+model Notification {
+  id        String           @id @default(cuid())
+  userId    String?
+  type      NotificationType @default(INFO)
+  title     String
+  body      String
+  readAt    DateTime?
+  createdAt DateTime         @default(now())
+  user      User?            @relation(fields: [userId], references: [id])
+}
+
+model AdminSettings {
+  id          String   @id @default(cuid())
+  key         String   @unique
+  value       Json
+  description String?
+  updatedAt   DateTime @updatedAt
+}
+
+model ActivityLog {
+  id        String   @id @default(cuid())
+  userId    String?
+  action    String
+  entity    String?
+  entityId  String?
+  ipHash    String?
+  metadata  Json?
+  createdAt DateTime @default(now())
+  user      User?    @relation(fields: [userId], references: [id])
+
+  @@index([action, createdAt])
+}

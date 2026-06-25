@@ -1,0 +1,28 @@
+Name: Anubhav Singh
+GitHub: UnknownHawkins (https://github.com/UnknownHawkins)
+Role: Full-Stack Developer
+Location: India
+Email: hello@anubhav.dev
+
+== SUMMARY ==
+I'm a passionate full-stack developer with 3+ years of experience building production-grade web applications. I specialize in Next.js, TypeScript, and modern backend systems — turning complex ideas into fast, secure, and beautiful digital experiences.
+
+== SKILLS ==
+- Frontend: React, Next.js 15, TypeScript, Tailwind CSS, Framer Motion, Three.js, GSAP
+- Backend: Node.js, Express.js, Prisma ORM, GraphQL, REST APIs
+- DevOps: Docker, GitHub Actions, Vercel, Railway
+- Auth & Security: Clerk, JWT, RBAC
+- Databases: PostgreSQL (Neon/Supabase), Redis (Upstash)
+- AI & ML: Google Gemini, OpenAI API, LangChain
+- Tools: Git, VS Code, Figma, Postman
+
+== INTERESTS ==
+- Open source contributions
+- Software architecture & system design
+- Web performance optimization
+- AI/ML integrations in web apps
+- Developer tooling
+
+== LANGUAGES ==
+- Hindi (Native)
+- English (Professional)

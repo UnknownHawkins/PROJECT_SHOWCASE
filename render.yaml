@@ -1,0 +1,39 @@
+services:
+  - type: web
+    name: projects-showcase
+    runtime: node
+    buildCommand: npx prisma generate && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_VERSION
+        value: "20.11.0"
+      - key: NEXT_TELEMETRY_DISABLED
+        value: "1"
+      - key: NEXT_PUBLIC_SITE_URL
+        sync: false # Your deployed URL (e.g., https://your-app.onrender.com)
+      - key: CONTACT_ALLOWED_ORIGIN
+        sync: false # Same as NEXT_PUBLIC_SITE_URL
+      - key: CONTACT_WEBHOOK_URL
+        sync: false # Discord/Slack webhook URL for contact form submissions (Optional)
+      - key: DATABASE_URL
+        sync: false # Connection string for PostgreSQL database
+      # ── Upstash Redis (used by src/lib/cache.ts for GitHub stats caching) ──
+      - key: UPSTASH_REDIS_REST_URL
+        sync: false # Upstash Redis REST URL (e.g., https://your-db.upstash.io)
+      - key: UPSTASH_REDIS_REST_TOKEN
+        sync: false # Upstash Redis REST token
+      # ── GitHub Integration (used by src/services/github.ts) ──────────────
+      - key: GITHUB_USERNAME
+        sync: false # Your GitHub username (e.g., UnknownHawkins)
+      - key: GITHUB_TOKEN
+        sync: false # GitHub Personal Access Token for GraphQL API (Optional but recommended)
+      - key: NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
+        sync: false # Clerk Publishable Key (Optional)
+      - key: CLERK_SECRET_KEY
+        sync: false # Clerk Secret Key (Optional)
+      - key: NEXT_PUBLIC_CLERK_SIGN_IN_URL
+        value: "/sign-in"
+      - key: NEXT_PUBLIC_CLERK_SIGN_UP_URL
+        value: "/sign-up"
+      - key: GEMINI_API_KEY
+        sync: false # Gemini API Key for AI playground features (Optional)

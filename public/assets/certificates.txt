@@ -1,0 +1,29 @@
+== CERTIFICATES & ACCOMPLISHMENTS ==
+
+CERTIFICATIONS:
+
+1. Meta Frontend Developer Professional Certificate
+   Issuer: Meta / Coursera
+   Issued: June 2023
+   URL: https://www.coursera.org
+
+2. Google Cloud Professional Developer
+   Issuer: Google Cloud
+   Issued: January 2024
+   URL: https://cloud.google.com/certification
+
+3. AWS Cloud Practitioner
+   Issuer: Amazon Web Services
+   Issued: September 2023
+   URL: https://aws.amazon.com/certification
+
+== ACCOMPLISHMENTS ==
+
+- Built and deployed 20+ production web applications
+- Maintained 95+ Lighthouse performance score across all major projects
+- Contributed to multiple open source repositories on GitHub
+- Implemented real-time GitHub GraphQL integrations with Redis caching
+- Architected enterprise-grade multi-role authentication systems
+- Delivered full-stack projects with CI/CD pipelines using GitHub Actions
+- Active GitHub contributor (UnknownHawkins) — public repos with 100+ commits
+- Completed B.Tech in Computer Science with 8.5 CGPA
