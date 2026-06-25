@@ -7,7 +7,7 @@ const globalForPrisma = globalThis as typeof globalThis & {
 async function loadPrismaClient() {
   const dynamicImport = new Function("specifier", "return import(specifier)") as (
     specifier: string
-  ) => Promise<{ PrismaClient: new () => PrismaClientLike }>;
+  ) => Promise<{ PrismaClient: new (options?: Record<string, unknown>) => PrismaClientLike }>;
 
   return dynamicImport("@prisma/client");
 }
@@ -19,7 +19,13 @@ export async function getDb() {
 
   if (!globalForPrisma.prisma) {
     const { PrismaClient } = await loadPrismaClient();
-    globalForPrisma.prisma = new PrismaClient();
+    globalForPrisma.prisma = new PrismaClient({
+      datasources: {
+        db: {
+          url: process.env.DATABASE_URL,
+        },
+      },
+    });
   }
 
   return globalForPrisma.prisma;
