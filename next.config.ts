@@ -22,10 +22,14 @@ const securityHeaders = [
       "frame-ancestors 'none'",
       "form-action 'self'",
       "img-src 'self' data: https:",
-      "font-src 'self' data:",
-      "style-src 'self' 'unsafe-inline'",
-      "script-src 'self' 'unsafe-inline'",
-      "connect-src 'self' https:"
+      "font-src 'self' data: https://fonts.gstatic.com",
+      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+      // Clerk loads its JS bundle from clerk.accounts.dev
+      "script-src 'self' 'unsafe-inline' https://*.clerk.accounts.dev https://*.clerk.com",
+      // Clerk API calls + local dev (lcl.dev)
+      "connect-src 'self' https: wss: https://*.clerk.accounts.dev https://*.clerk.com https://*.clerk.*.lcl.dev",
+      // Clerk hosted pages run in iframes
+      "frame-src 'self' https://*.clerk.accounts.dev https://*.clerk.com"
     ].join("; ")
   }
 ];
