@@ -25,11 +25,11 @@ const securityHeaders = [
       "font-src 'self' data: https://fonts.gstatic.com",
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       // Clerk loads its JS bundle from clerk.accounts.dev
-      "script-src 'self' 'unsafe-inline' https://*.clerk.accounts.dev https://*.clerk.com",
+      "script-src 'self' 'unsafe-inline' https://*.clerk.accounts.dev https://*.clerk.com https://challenges.cloudflare.com",
       // Clerk API calls + local dev (lcl.dev)
-      "connect-src 'self' https: wss: https://*.clerk.accounts.dev https://*.clerk.com https://*.clerk.*.lcl.dev",
+      "connect-src 'self' https: wss: https://*.clerk.accounts.dev https://*.clerk.com https://*.clerk.*.lcl.dev https://challenges.cloudflare.com",
       // Clerk hosted pages run in iframes
-      "frame-src 'self' https://*.clerk.accounts.dev https://*.clerk.com"
+      "frame-src 'self' https://*.clerk.accounts.dev https://*.clerk.com https://challenges.cloudflare.com"
     ].join("; ")
   }
 ];
