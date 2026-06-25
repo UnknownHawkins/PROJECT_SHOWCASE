@@ -1,3 +1,4 @@
+import {ClerkProvider} from "@clerk/nextjs";
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -31,12 +32,14 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en" suppressHydrationWarning>
       <body suppressHydrationWarning>
-        <Providers>
+        <ClerkProvider>
+          <Providers>
           {children}
           <FloatingChat />
           <Analytics />
           <SpeedInsights />
-        </Providers>
+          </Providers>
+        </ClerkProvider>
       </body>
     </html>
   );
