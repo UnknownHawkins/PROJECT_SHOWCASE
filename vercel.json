@@ -1,8 +1,5 @@
 {
   "framework": "nextjs",
-  "buildCommand": "npx prisma generate && npm run build",
-  "installCommand": "npm ci",
-  "env": {
-    "DATABASE_URL": "postgresql://build:build@localhost:5432/build"
-  }
+  "buildCommand": "npx prisma generate && next build",
+  "installCommand": "npm ci"
 }
